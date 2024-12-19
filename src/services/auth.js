@@ -16,7 +16,16 @@ export const authService = {
     localStorage.removeItem("token");
   },
   getCurrentUser: () => api.get("/api/auth/me"),
-  forgotPassword: (email) => api.post("/api/forgot-password", { email }),
-  resetPassword: (token, password) =>
-    api.post("/api/reset-password", { token, password }),
+  resetPassword: (password, { email }) => {
+    console.log("Resetting password for:", email);
+    return api.post("/api/auth/reset-password", {
+      email,
+      password,
+    });
+  },
+
+  forgotPassword: (email) => {
+    console.log("Sending forgot password request for:", email);
+    return api.post("/api/auth/forgot-password", { email });
+  },
 };
