@@ -12,10 +12,8 @@ export const userService = {
     }),
   getProfilePictureUrl: (path) => {
     if (!path) return "https://via.placeholder.com/128";
-    // Just use the filename directly since that's what we're storing now
-    return `${
-      import.meta.env.VITE_API_URL
-    }/api/users/profile-picture/${encodeURIComponent(path)}`;
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8081";
+    return `${baseUrl}/api/users/profile-picture/${encodeURIComponent(path)}`;
   },
 
   // User management methods (admin)
